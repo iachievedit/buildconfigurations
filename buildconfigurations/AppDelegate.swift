@@ -16,7 +16,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
     // Override point for customization after application launch.
+    
+    #if Debug
+      slogLevel = SLogLevel.Verbose
+    #else
+      #if Production
+      slogLevel = SLogLevel.Info
+      #endif
+    #endif
+    
+    ENTRY_LOG()
+      
+    SLogInfo("Service URL is set to \(gWebServiceUrl)")
+    
+    let m = multiply(6, by: 7)
+
     return true
+    
+  }
+  
+  func multiply(a:Int, by b:Int) -> Int {
+    
+    ENTRY_LOG()
+    let r = a * b
+    SLogVerbose("\(a) multiplied by \(b) is \(r)")
+    EXIT_LOG()
+    
+    return r
   }
 
   func applicationWillResignActive(application: UIApplication) {

@@ -12,6 +12,8 @@
 		76BB0966194CFAF700DBCE32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76BB0964194CFAF700DBCE32 /* Main.storyboard */; };
 		76BB0968194CFAF700DBCE32 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76BB0967194CFAF700DBCE32 /* Images.xcassets */; };
 		76BB0974194CFAF800DBCE32 /* buildconfigurationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BB0973194CFAF800DBCE32 /* buildconfigurationsTests.swift */; };
+		76BB097E194CFB1E00DBCE32 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BB097D194CFB1E00DBCE32 /* Logging.swift */; };
+		76BB0986194DDC9800DBCE32 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BB0985194DDC9700DBCE32 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +36,8 @@
 		76BB096D194CFAF800DBCE32 /* buildconfigurationsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = buildconfigurationsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		76BB0972194CFAF800DBCE32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76BB0973194CFAF800DBCE32 /* buildconfigurationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = buildconfigurationsTests.swift; sourceTree = "<group>"; };
+		76BB097D194CFB1E00DBCE32 /* Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
+		76BB0985194DDC9700DBCE32 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +79,8 @@
 		76BB095D194CFAF700DBCE32 /* buildconfigurations */ = {
 			isa = PBXGroup;
 			children = (
+				76BB0985194DDC9700DBCE32 /* Constants.swift */,
+				76BB097D194CFB1E00DBCE32 /* Logging.swift */,
 				76BB0960194CFAF700DBCE32 /* AppDelegate.swift */,
 				76BB0962194CFAF700DBCE32 /* ViewController.swift */,
 				76BB0964194CFAF700DBCE32 /* Main.storyboard */,
@@ -209,7 +215,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				76BB0963194CFAF700DBCE32 /* ViewController.swift in Sources */,
+				76BB097E194CFB1E00DBCE32 /* Logging.swift in Sources */,
 				76BB0961194CFAF700DBCE32 /* AppDelegate.swift in Sources */,
+				76BB0986194DDC9800DBCE32 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,7 +251,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		76BB0975194CFAF800DBCE32 /* Debug */ = {
+		76BB097F194D068400DBCE32 /* DebugStaging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -280,12 +288,44 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				METAL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-DDebug -DStaging";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
-			name = Debug;
+			name = DebugStaging;
 		};
-		76BB0976194CFAF800DBCE32 /* Release */ = {
+		76BB0980194D068400DBCE32 /* DebugStaging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = buildconfigurations/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = DebugStaging;
+		};
+		76BB0981194D068400DBCE32 /* DebugStaging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/buildconfigurations.app/buildconfigurations";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = buildconfigurationsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				METAL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = DebugStaging;
+		};
+		76BB0987194DE46900DBCE32 /* ReleaseProduction */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -315,12 +355,13 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				METAL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "-DRelease -DProduction";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
-			name = Release;
+			name = ReleaseProduction;
 		};
-		76BB0978194CFAF800DBCE32 /* Debug */ = {
+		76BB0988194DE46900DBCE32 /* ReleaseProduction */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -329,40 +370,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
-			name = Debug;
+			name = ReleaseProduction;
 		};
-		76BB0979194CFAF800DBCE32 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				INFOPLIST_FILE = buildconfigurations/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		76BB097B194CFAF800DBCE32 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/buildconfigurations.app/buildconfigurations";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = buildconfigurationsTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				METAL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-			};
-			name = Debug;
-		};
-		76BB097C194CFAF800DBCE32 /* Release */ = {
+		76BB0989194DE46900DBCE32 /* ReleaseProduction */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/buildconfigurations.app/buildconfigurations";
@@ -376,7 +386,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
-			name = Release;
+			name = ReleaseProduction;
 		};
 /* End XCBuildConfiguration section */
 
@@ -384,27 +394,29 @@
 		76BB0956194CFAF700DBCE32 /* Build configuration list for PBXProject "buildconfigurations" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				76BB0975194CFAF800DBCE32 /* Debug */,
-				76BB0976194CFAF800DBCE32 /* Release */,
+				76BB097F194D068400DBCE32 /* DebugStaging */,
+				76BB0987194DE46900DBCE32 /* ReleaseProduction */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = DebugStaging;
 		};
 		76BB0977194CFAF800DBCE32 /* Build configuration list for PBXNativeTarget "buildconfigurations" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				76BB0978194CFAF800DBCE32 /* Debug */,
-				76BB0979194CFAF800DBCE32 /* Release */,
+				76BB0980194D068400DBCE32 /* DebugStaging */,
+				76BB0988194DE46900DBCE32 /* ReleaseProduction */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = DebugStaging;
 		};
 		76BB097A194CFAF800DBCE32 /* Build configuration list for PBXNativeTarget "buildconfigurationsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				76BB097B194CFAF800DBCE32 /* Debug */,
-				76BB097C194CFAF800DBCE32 /* Release */,
+				76BB0981194D068400DBCE32 /* DebugStaging */,
+				76BB0989194DE46900DBCE32 /* ReleaseProduction */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = DebugStaging;
 		};
 /* End XCConfigurationList section */
 	};
